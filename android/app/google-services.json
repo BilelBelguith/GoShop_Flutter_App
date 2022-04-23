@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "37599551541",
+    "project_id": "pfeshopapp",
+    "storage_bucket": "pfeshopapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37599551541:android:a7278fee10bc23031bd17c",
+        "android_client_info": {
+          "package_name": "com.example.projectpfe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37599551541-6mg43o5poillkq7v1g06rtvshjmacmiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9-PfeBPkWrNe-Zox6k9WqPLK17awltwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37599551541-6mg43o5poillkq7v1g06rtvshjmacmiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
