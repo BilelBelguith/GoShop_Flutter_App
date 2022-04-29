@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projectpfe/screen/shop_owner_pages/home_page.dart';
+import 'package:projectpfe/screen/signin_page.dart';
+import 'package:projectpfe/screen/signin_page.dart';
 
 import '../authentication/fireabse_auth.dart';
+import 'customer_pages/home_page.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -12,7 +17,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   FirebaseAuthentication firebaseAuthentication = FirebaseAuthentication();
 
@@ -68,12 +73,15 @@ class _SignInState extends State<SignIn> {
         ),
         padding: EdgeInsets.only(left: 25 , right: 25),
         child: Center(
-          child: Column(
+          child: Form(
+            key: _formKey,
+            child :Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
 
               SizedBox(height: 20),
+
               TextFormField(
                 cursorColor: Colors.brown,
                 controller: _emailController,
@@ -156,15 +164,47 @@ class _SignInState extends State<SignIn> {
                         ),)
                   ),
                   onPressed: ()async{
-                    String email = _emailController.text ;
-                    String password = _passwordController.text;
-                    var user = await firebaseAuthentication.signIn(email, password);
-                    print(user);
+                    if (_formKey.currentState!.validate()) {
+                      try{
+                        String email = _emailController.text ;
+                        String password = _passwordController.text;
+                        var user = await firebaseAuthentication.signIn(email, password);
+                        //success
+
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => const HomePageCustomer()));
+
+                      }on FirebaseAuthException catch (e) {
 
 
+
+                        print(e);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+
+                                backgroundColor: Colors.brown[200],
+                                elevation: 20,
+                                title: Center(child :
+                                Text("Error",
+                                    style: TextStyle(
+                                      fontSize: 22 ,
+                                      fontWeight:FontWeight.bold,
+                                      letterSpacing: 2.0,)
+                                ),
+                                ),
+                                content: Text(e.message.toString() , style: TextStyle(
+                                  fontSize: 15 ,
+                                  fontWeight:FontWeight.bold,
+                                  letterSpacing: 2.0,)),
+
+                              );
+                            });
+                      }
+                    }
                   })
             ],
-          ),
+          ),),
         ),
       ),
 

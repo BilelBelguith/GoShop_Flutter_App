@@ -4,21 +4,24 @@ class FirebaseAuthentication {
   //return one object of firebase auth(check)
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance ;
 
-  // Future<String> getCurrentUser() async{
-  //   String uid = await _firebaseAuth.currentUser!.uid;
-  //   return uid ;
-  // }
+    signOut() async{
+    await _firebaseAuth.signOut();
+    }
 
-
-  signIn( String email , String password)async{
-    var user = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  Future<User> getCurrentUser () async {
+    User user = await _firebaseAuth.currentUser!;
     print(user);
-    return user ; 
+    return user ;
   }
 
-  register(String email , String password)async{
-    var user = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-    return user ;
+  Future<User?> signIn( String email , String password)async{
+    UserCredential userCredential= await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    return userCredential.user ;
+  }
+
+  Future<User?> register(String email , String password)async{
+    UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    return userCredential.user ;
 
   }
 
