@@ -31,11 +31,13 @@ class _AddProductState extends State<AddProduct> {
     super.dispose();
   }
   CollectionReference products = FirebaseFirestore.instance.collection('Products');
+  final productsi = FirebaseFirestore.instance.collection('Categories').doc();
 
     Future<void> addProduct() {
     // Call the user's CollectionReference to add a new user
     return products
         .add({
+      'id' : productsi.id ,
       'title': _titleController.text,
       'description': _descriptionController.text,
       'price': _priceController.text ,

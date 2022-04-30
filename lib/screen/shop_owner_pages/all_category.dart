@@ -1,6 +1,10 @@
+
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:projectpfe/screen/shop_owner_pages/update_form.dart';
+
 
 
 class AllCategory extends StatefulWidget {
@@ -12,7 +16,8 @@ class AllCategory extends StatefulWidget {
 
 class _AllCategoryState extends State<AllCategory> {
 
-  CollectionReference products = FirebaseFirestore.instance.collection('Categories');
+  CollectionReference Category = FirebaseFirestore.instance.collection('Categories');
+  TextEditingController _valueUpdate = TextEditingController();
 
 
   @override
@@ -47,7 +52,7 @@ class _AllCategoryState extends State<AllCategory> {
   Widget _drawProducts(){
 
     return  StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('Categories').snapshots(),
+      stream: Category.snapshots(),
       builder: (BuildContext context , AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError)
           return Text('Error : ${snapshot.error}');
@@ -66,9 +71,47 @@ class _AllCategoryState extends State<AllCategory> {
             return new ListView.builder(
                 itemCount: snapshot.data!.docs.length ,
                 itemBuilder: (context , i){
-                  return  ListTile(
-                    title: new Text("${snapshot.data!.docs[i].get('title')}"),
+                  return  Row(
+                    children: [
 
+
+                      Container(
+                        padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+
+                      child :Text("${snapshot.data!.docs[i].get('title')}" ,
+                          style: TextStyle(
+                            fontSize: 22 ,
+                            fontWeight:FontWeight.bold,
+                            letterSpacing: 3.0,
+
+                          ))
+                      ),
+                      SizedBox(width: 80),
+                      IconButton(
+
+                          onPressed: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> UpdateCategory(value: '',)));
+
+                          },
+                          icon: Icon(Icons.update ,
+                            color: Colors.green,
+
+                          )
+                      ),
+                      SizedBox(width: 10),
+
+                      IconButton(
+
+                          onPressed: (){
+                            String id =snapshot.data!.docs[i].id;
+                            Category.doc(id).delete();
+                          },
+                          icon: Icon(Icons.delete ,
+                              color: Colors.red,
+                          size: 30,
+                          )
+                      )
+                    ],
                   );
                 });
 
@@ -78,5 +121,4 @@ class _AllCategoryState extends State<AllCategory> {
     );
   }
 
-
-}
+  }

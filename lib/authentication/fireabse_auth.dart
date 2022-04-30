@@ -8,10 +8,10 @@ class FirebaseAuthentication {
     await _firebaseAuth.signOut();
     }
 
-  Future<User> getCurrentUser () async {
+  Future<String> getCurrentUser () async {
     User user = await _firebaseAuth.currentUser!;
     print(user);
-    return user ;
+    return user.uid ;
   }
 
   Future<User?> signIn( String email , String password)async{

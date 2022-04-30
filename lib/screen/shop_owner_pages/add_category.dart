@@ -25,11 +25,13 @@ class _AddCategoryState extends State<AddCategory> {
 
 
   CollectionReference category = FirebaseFirestore.instance.collection('Categories');
-
+final categoryi = FirebaseFirestore.instance.collection('Categories').doc();
   Future<void> addCategory() {
     // Call the user's CollectionReference to add a new user
     return category
         .add({
+
+      'id' : categoryi.id ,
       'title': _categoryTitleController.text,
 
     }).then((value) => print("Category Added"))
@@ -151,6 +153,8 @@ class _AddCategoryState extends State<AddCategory> {
                       setState((){
                         isLoding = true ;
                       });
+
+
                       addCategory().then((value) => setState((){
                         isLoding = false ;
                       })).then((value) =>   showDialog(

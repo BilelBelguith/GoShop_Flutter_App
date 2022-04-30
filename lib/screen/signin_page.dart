@@ -171,7 +171,7 @@ class _SignInState extends State<SignIn> {
                         var user = await firebaseAuthentication.signIn(email, password);
                         //success
 
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => const HomePageCustomer()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => const HomePageShopOwner()));
 
                       }on FirebaseAuthException catch (e) {
 
