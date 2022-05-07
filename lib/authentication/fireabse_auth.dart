@@ -6,7 +6,14 @@ class FirebaseAuthentication {
 
     signOut() async{
     await _firebaseAuth.signOut();
+
     }
+
+  String getuid (){
+    final useruid = _firebaseAuth.currentUser!.uid;
+    print(useruid);
+    return useruid ;
+  }
 
   Future<String> getCurrentUser () async {
     User user = await _firebaseAuth.currentUser!;

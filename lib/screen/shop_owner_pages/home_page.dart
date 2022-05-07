@@ -44,7 +44,7 @@ class _HomePageShopOwnerState extends State<HomePageShopOwner> {
       ),
       drawer: NavigationDrawer() ,
       
-      body: Center(child : Text('menu')),
+      body: Center(child : Text('Use Drawer For More Activities')),
     ));
   }
 }

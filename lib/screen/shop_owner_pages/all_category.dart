@@ -16,6 +16,8 @@ class AllCategory extends StatefulWidget {
 
 class _AllCategoryState extends State<AllCategory> {
 
+  TextEditingController _updater = TextEditingController();
+
   CollectionReference Category = FirebaseFirestore.instance.collection('Categories');
   TextEditingController _valueUpdate = TextEditingController();
 
@@ -53,6 +55,7 @@ class _AllCategoryState extends State<AllCategory> {
 
     return  StreamBuilder<QuerySnapshot>(
       stream: Category.snapshots(),
+      //stream: Category.where('title' ,isEqualTo: "categ 2").snapshots(),
       builder: (BuildContext context , AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError)
           return Text('Error : ${snapshot.error}');
@@ -72,6 +75,7 @@ class _AllCategoryState extends State<AllCategory> {
                 itemCount: snapshot.data!.docs.length ,
                 itemBuilder: (context , i){
                   return  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
 
@@ -90,8 +94,82 @@ class _AllCategoryState extends State<AllCategory> {
                       IconButton(
 
                           onPressed: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> UpdateCategory(value: '',)));
+                            showDialog(
 
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+
+                                    backgroundColor: Colors.brown[200],
+                                    elevation: 20,
+                                    title: Center(child :
+                                    Text("UPDATE CATEGORY",
+                                        style: TextStyle(
+                                          fontSize: 22 ,
+                                          fontWeight:FontWeight.bold,
+                                          letterSpacing: 2.0,)
+                                    ),
+                                    ),
+                                    content: TextFormField(
+                                      cursorColor: Colors.brown,
+                                      decoration: InputDecoration(
+
+                                        labelText:"${snapshot.data!.docs[i].get('title')}" ,
+                                        labelStyle: TextStyle(color: Colors.brown),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(5),
+                                          borderSide: BorderSide(
+                                            color: Colors.brown,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                          borderSide: BorderSide(
+                                            color: Colors.brown,
+                                            width: 2.0,
+                                          ),
+                                        ),
+
+                                      ),
+                                      controller: _updater,
+                                    ),
+
+                                      actions :[
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.brown,
+
+                                          ),
+                                          child: Container(
+                                              //padding: EdgeInsets.fromLTRB(26, 1, 26, 1),
+                                              child:Text('CONFIRM',style: TextStyle(
+                                                fontSize: 15 ,
+                                                fontWeight:FontWeight.bold,
+                                                letterSpacing: 2.0,
+
+                                              ),)
+                                          ),
+                                          onPressed: (){
+                                            String id =snapshot.data!.docs[i].id;
+                                            Category.doc(id).update({ 'title' : _updater.text });
+                                            _updater.clear();
+
+                                          },
+                                        ),
+
+                                      ]
+
+
+                                  );
+                                }
+
+                            );
+
+                            // String id =snapshot.data!.docs[i].id;
+                            // Category.doc(id).update({ 'title' : "New trainer" });
+                            //Navigator.of(context).push(MaterialPageRoute(builder: (context)=> UpdateCategory(value: '',)));
+                            
                           },
                           icon: Icon(Icons.update ,
                             color: Colors.green,

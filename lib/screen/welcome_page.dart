@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:projectpfe/screen/register_page.dart';
+import 'package:projectpfe/screen/register_shop_owner.dart';
 import 'package:projectpfe/screen/signin_page.dart';
+import 'package:projectpfe/screen/signin_shop_owner.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -162,7 +164,7 @@ class WelcomeScreen extends StatelessWidget {
                                     ),)
                               ),
                               onPressed: (){
-                                Navigator.push(context,MaterialPageRoute(builder: (context) => const SignIn()));
+                                Navigator.push(context,MaterialPageRoute(builder: (context) => const SignInShopOwner()));
                               },
                             ),
                             SizedBox(width: 25),
@@ -181,7 +183,7 @@ class WelcomeScreen extends StatelessWidget {
                                   ),)
                               ),
                               onPressed: (){
-                                Navigator.push(context,MaterialPageRoute(builder: (context) => const Register()));
+                                Navigator.push(context,MaterialPageRoute(builder: (context) => const RegisterShopOwner()));
                               },
                             ),
                           ],
