@@ -94,7 +94,23 @@ String useruid() => firebaseAuthentication.getuid();
             return new ListView.builder(
                 itemCount: snapshot.data!.docs.length ,
                 itemBuilder: (context , i){
-                  return  Column(
+                  return Container(
+                    height: 550,
+                    margin: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: Colors.brown[200],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.brown,
+                          blurRadius: 5.0,
+                          spreadRadius: 5.0,
+                          offset: Offset(5.0, 5.0), // shadow direction: bottom right
+                        )
+                      ],
+                    ),
+
+                    child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(height: 20),
@@ -102,7 +118,7 @@ String useruid() => firebaseAuthentication.getuid();
                       Text("First Name :" ,
                           style: TextStyle(
                             color: Colors.brown,
-                            fontSize: 22 ,
+                            fontSize: 15,
                             fontWeight:FontWeight.bold,
                             letterSpacing: 2.0,
 
@@ -112,17 +128,18 @@ String useruid() => firebaseAuthentication.getuid();
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                              padding: EdgeInsets.fromLTRB(50, 5, 50, 5),
+                              padding: EdgeInsets.fromLTRB(10, 5, 50,10),
 
                               child :Text("${snapshot.data!.docs[i].get('first_Name')}" ,
                                   style: TextStyle(
-                                    fontSize: 20 ,
+                                    fontSize: 16 ,
                                     fontWeight:FontWeight.bold,
                                     letterSpacing: 3.0,
 
                                   )
                               )
                           ),
+
                           IconButton(
 
                               onPressed: (){
@@ -205,15 +222,19 @@ String useruid() => firebaseAuthentication.getuid();
                               },
                               icon: Icon(Icons.update ,
                                 color: Colors.green,
+                                size: 18,
 
                               )
                           ),
                         ],
                       ),
+
+
+                      SizedBox(height: 20),
                       Text("Last Name :" ,
                           style: TextStyle(
                             color: Colors.brown,
-                            fontSize: 22 ,
+                            fontSize: 15 ,
                             fontWeight:FontWeight.bold,
                             letterSpacing: 2.0,
 
@@ -223,11 +244,11 @@ String useruid() => firebaseAuthentication.getuid();
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                              padding: EdgeInsets.fromLTRB(50, 5, 10, 5),
+                              padding: EdgeInsets.fromLTRB(10, 5, 10,10),
 
                               child :Text("${snapshot.data!.docs[i].get('last_Name')}" ,
                                   style: TextStyle(
-                                    fontSize: 20 ,
+                                    fontSize: 16 ,
                                     fontWeight:FontWeight.bold,
                                     letterSpacing: 3.0,
 
@@ -314,15 +335,19 @@ String useruid() => firebaseAuthentication.getuid();
                               },
                               icon: Icon(Icons.update ,
                                 color: Colors.green,
+                                size: 18,
 
                               )
                           ),
                         ],
                       ),
+
+
+                      SizedBox(height: 20),
                       Text("Phone :" ,
                           style: TextStyle(
                             color: Colors.brown,
-                            fontSize: 22 ,
+                            fontSize: 15 ,
                             fontWeight:FontWeight.bold,
                             letterSpacing: 2.0,
 
@@ -332,11 +357,11 @@ String useruid() => firebaseAuthentication.getuid();
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                              padding: EdgeInsets.fromLTRB(50, 5, 10, 5),
+                              padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
 
                               child :Text("${snapshot.data!.docs[i].get('phone')}" ,
                                   style: TextStyle(
-                                    fontSize: 20 ,
+                                    fontSize: 16 ,
                                     fontWeight:FontWeight.bold,
                                     letterSpacing: 3.0,
 
@@ -423,15 +448,18 @@ String useruid() => firebaseAuthentication.getuid();
                               },
                               icon: Icon(Icons.update ,
                                 color: Colors.green,
+                                size: 18,
 
                               )
                           ),
                         ],
                       ),
+
+                      SizedBox(height: 20),
                       Text("Gender :" ,
                           style: TextStyle(
                             color: Colors.brown,
-                            fontSize: 22 ,
+                            fontSize:15 ,
                             fontWeight:FontWeight.bold,
                             letterSpacing: 2.0,
 
@@ -441,11 +469,11 @@ String useruid() => firebaseAuthentication.getuid();
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                              padding: EdgeInsets.fromLTRB(50, 5, 10, 5),
+                              padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
 
                               child :Text("${snapshot.data!.docs[i].get('gender')}" ,
                                   style: TextStyle(
-                                    fontSize: 20 ,
+                                    fontSize: 16 ,
                                     fontWeight:FontWeight.bold,
                                     letterSpacing: 3.0,
 
@@ -455,7 +483,7 @@ String useruid() => firebaseAuthentication.getuid();
 
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 70),
 
 
 
@@ -491,7 +519,12 @@ String useruid() => firebaseAuthentication.getuid();
 
                         },
                       ),
+                      SizedBox(height: 20),
+                      
+                      Center(child  : Text('make sure that all your information is correct '),),
+                      Center(child  : Text('For your Reliability'),),
                     ],
+                  ),
                   );
                 });
 

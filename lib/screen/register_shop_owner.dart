@@ -531,7 +531,7 @@ class _RegisterShopOwnerState extends State<RegisterShopOwner> {
   }
   Future<void> customerSetup ( ) async {
     CollectionReference costumers = FirebaseFirestore.instance.collection('ShopOwner');
-    final shopownerr = FirebaseFirestore.instance.collection('Categories').doc();
+    final shopownerr = FirebaseFirestore.instance.collection('ShopOwner').doc();
     FirebaseAuth auth = FirebaseAuth.instance ;
     String uid = auth.currentUser!.uid.toString();
     costumers.add({

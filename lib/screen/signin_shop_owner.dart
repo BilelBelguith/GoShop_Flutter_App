@@ -142,6 +142,27 @@ class _SignInShopOwnerState extends State<SignInShopOwner> {
                   ),
 
                 ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Forgot Password?" ,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12 ,
+
+
+                        )),
+                    Text("Creat new account" ,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12 ,
+
+
+
+                        )),
+                  ],
+                ),
                 SizedBox(height: 20),
 
 
@@ -154,7 +175,7 @@ class _SignInShopOwnerState extends State<SignInShopOwner> {
 
                     ),
                     child:Container(
-                        padding: EdgeInsets.fromLTRB(18, 1, 18, 1),
+                        padding: EdgeInsets.fromLTRB(100, 1, 100, 1),
                         child:Text('SIGN IN',
                           style: TextStyle(
                             fontSize: 15 ,

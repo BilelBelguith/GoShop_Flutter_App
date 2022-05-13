@@ -748,7 +748,7 @@ String _value =''  ;
   }
   Future<void> customerSetup ( ) async {
     CollectionReference costumers = FirebaseFirestore.instance.collection('Customers');
-    final costomerr = FirebaseFirestore.instance.collection('Categories').doc();
+    final costomerr = FirebaseFirestore.instance.collection('Customers').doc();
     FirebaseAuth auth = FirebaseAuth.instance ;
     String uid = auth.currentUser!.uid.toString();
     costumers.add({

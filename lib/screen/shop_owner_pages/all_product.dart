@@ -34,10 +34,27 @@ class _AllProductState extends State<AllProduct> {
             default :
               return
 
-                Row(
+                Container(
+                    margin: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.brown,
+                          blurRadius: 5.0,
+                          spreadRadius: 5.0,
+                          offset: Offset(5.0, 5.0), // shadow direction: bottom right
+                        )
+                      ],
+                    ),
+
+
+
+                    child : Row(
                   children: [
                     SizedBox(width: 10),
-                    Text('Pick Category :' , style: TextStyle(
+                    Text('Filtre by Category :' , style: TextStyle(
                       fontSize: 17,
                       color: Colors.brown,
                       fontWeight:FontWeight.bold,
@@ -59,6 +76,7 @@ class _AllProductState extends State<AllProduct> {
                       onChanged: (newValue) {
                         setState(() {
                           dropdownValue = newValue!;
+                          print(dropdownValue);
                         });
                       },
 
@@ -74,7 +92,7 @@ class _AllProductState extends State<AllProduct> {
 
                     )
                   ],
-                );
+                ));
           }
         }
     );
@@ -97,29 +115,60 @@ class _AllProductState extends State<AllProduct> {
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
       backgroundColor: Colors.brown[200],
-      appBar: AppBar(
-        
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(160.0),
+        child :
+        Column(
+          children: [
+            AppBar(
+              // actions: [
+              //   Padding(
+              //       padding: EdgeInsets.only(right: 20.0),
+              //       child: Container(
+              //         height: 20,
+              //         width: 20,
+              //         child: selectCategory(),
+              //       )
+              //   ),
+              //   //selectCategory(),
+              // ],
 
-          backgroundColor: Colors.brown,
-          shape: RoundedRectangleBorder(
-              borderRadius:  BorderRadius.only(
-                bottomRight: Radius.circular(70),
-              )
-          ),
-          elevation: 4,
-          title: Center(
-            child :Text('All Products' ,
-              style: TextStyle(
-                fontSize: 22 ,
-                fontWeight:FontWeight.bold,
-                letterSpacing: 3.0,
 
-              ),),
-          )
-      ),
+                backgroundColor: Colors.brown,
+                shape: RoundedRectangleBorder(
+                    borderRadius:  BorderRadius.only(
+                      bottomRight: Radius.circular(70),
+                    )
+                ),
+                elevation: 4,
+                title: Center(
+                  child :Text('All Products' ,
+                    style: TextStyle(
+                      fontSize: 22 ,
+                      fontWeight:FontWeight.bold,
+                      letterSpacing: 3.0,
+
+                    ),),
+                )
+            ),
+
+            selectCategory(),
+            SizedBox(height: 20),
+
+
+          ],
+        )
+
+
+       ),
       body:
-          _drawProducts(),
-          // selectCategory(),
+
+        _drawProducts(),
+
+
+
+
+
 
 
 
@@ -130,7 +179,7 @@ class _AllProductState extends State<AllProduct> {
   Widget _drawProducts(){
 
     return  StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Products').snapshots(),
+        stream: FirebaseFirestore.instance.collection('Products').where('categories' ,isEqualTo:  dropdownValue).snapshots(),
         builder: (BuildContext context , AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError)
             return Text('Error : ${snapshot.error}');
@@ -173,6 +222,8 @@ class _AllProductState extends State<AllProduct> {
                         child:Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            SizedBox(height: 20),
+
 
 
 
